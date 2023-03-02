@@ -29,7 +29,7 @@ const DiceRoll = () => {
                 return (
                 <Button
                     onClick={() => {
-                    setRoll(item.onClickValue())
+                        setRoll(item.onClickValue())
                     }}
                     key={`dice-${item.text}`}
                     mx='1em'
