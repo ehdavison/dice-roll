@@ -1,9 +1,11 @@
 import React from 'react';
 import { Container, Flex, Button, Text } from '@mantine/core'
 import { useMemo, useState } from 'react';
+import useStore from '../hooks/useStore';
 
 const DiceRoll = () => {
-    const [roll, setRoll] = useState(0)
+    // const [roll, setRoll] = useState(0)
+    const { setRollResult } = useStore()
     const randomRoll = (max, min) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -22,14 +24,14 @@ const DiceRoll = () => {
 
         <Flex bg='#1A1A1D' align='center' direction='column' py='5em' w='100vw'>
             <Flex my='2em' direction='column'>
-                <Text color='white' size='3.5em'>{roll}</Text>
+                {/* <Text color='white' size='3.5em'>{roll}</Text> */}
             </Flex>
             <Flex>
             {items?.map((item) => {
                 return (
                 <Button
                     onClick={() => {
-                        setRoll(item.onClickValue())
+                        setRollResult(item.onClickValue())
                     }}
                     key={`dice-${item.text}`}
                     mx='1em'
