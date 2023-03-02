@@ -20,19 +20,21 @@ const DiceRoll = () => {
         })
         return (
 
-        <Flex align='center' direction='column' py='5em'>
-            <Flex my='2em'>
-                <Text size='2em'>{roll}</Text>
+        <Flex bg='#1A1A1D' align='center' direction='column' py='5em' w='100vw'>
+            <Flex my='2em' direction='column'>
+                <Text color='white' size='3.5em'>{roll}</Text>
             </Flex>
             <Flex>
             {items?.map((item) => {
                 return (
                 <Button
                     onClick={() => {
-                    setRoll(item.onClickValue())
+                        setRoll(item.onClickValue())
                     }}
                     key={`dice-${item.text}`}
                     mx='1em'
+                    size='lg'
+                    color='red'
                 >
                     {item.text}
                 </Button>

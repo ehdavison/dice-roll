@@ -1,9 +1,14 @@
 import './App.css';
 import DiceRoll from './components/diceRoll';
+import { Box } from '@mantine/core';
+
 
 function App() {
   return (
-    <DiceRoll />
+    <Box>
+      <DiceRoll />
+    </Box>
+    
   );
 }
 
