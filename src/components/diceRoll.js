@@ -5,7 +5,7 @@ import useStore from '../hooks/useStore';
 
 const DiceRoll = () => {
     // const [roll, setRoll] = useState(0)
-    const { setRollResult } = useStore()
+    const setRollResult  = useStore(state => state.setRollResult)
     const randomRoll = (max, min) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -22,9 +22,9 @@ const DiceRoll = () => {
         })
         return (
 
-        <Flex bg='#1A1A1D' align='center' direction='column' py='5em' w='100vw'>
+        <Flex align='center' direction='column'>
             <Flex my='2em' direction='column'>
-                {/* <Text color='white' size='3.5em'>{roll}</Text> */}
+                
             </Flex>
             <Flex>
             {items?.map((item) => {
@@ -36,7 +36,12 @@ const DiceRoll = () => {
                     key={`dice-${item.text}`}
                     mx='1em'
                     size='lg'
-                    color='red'
+                    sx={(theme) => ({
+                        backgroundColor : '#C3073F',
+                        '&:hover': {
+                            backgroundColor : '#950740'
+                        },
+                    })}
                 >
                     {item.text}
                 </Button>
