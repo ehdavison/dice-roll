@@ -10,6 +10,8 @@ const DiceRoll = () => {
     const [rollQueue, setRollQueue] = useState([])
     const [queueBool, setQueueBool] = useState(true)
     const setRollResult  = useStore(state => state.setRollResult)
+    const initialValue = 0;
+    const queueSum = rollQueue.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue)
     const randomRoll = (max, min) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -39,18 +41,52 @@ const DiceRoll = () => {
                 </Queue>
             </Flex>
             <Flex>
-            {items?.map((item) => {
-                return (
-                <Button
-                    onClick={() => { 
-                        if(queueBool !== true) {
-                            setRollResult(item.onClickValue())
-                        } else {
-                            setRollQueue([...rollQueue, item.onClickValue()])
-                        }
+                {items?.map((item) => {
+                    return (
+                    <Button
+                        onClick={() => { 
+                            if(queueBool !== true) {
+                                setRollResult(item.onClickValue())
+                            } else {
+                                setRollQueue([...rollQueue, item.onClickValue()])
+                            }
+                        }}
+                        key={`dice-${item.text}`}
+                        mx='1em'
+                        size='lg'
+                        sx={(theme) => ({
+                            backgroundColor : '#C3073F',
+                            '&:hover': {
+                                backgroundColor : '#950740'
+                            },
+                        })}
+                    >
+                        {item.text}
+                    </Button>
+                    )
+                })}
+                <Button 
+                    onClick={() => {
+                        setRollQueue([])
+                        setRollResult(0)
                     }}
-                    key={`dice-${item.text}`}
+                    size='lg'
                     mx='1em'
+                    sx={(theme) => ({
+                        backgroundColor : '#C3073F',
+                        '&:hover': {
+                            backgroundColor : '#950740'
+                        },
+                    })}
+                >
+                    CLEAR
+                </Button>
+                <Button
+                    mx='1em'
+                    onClick={() => {
+                        setQueueBool(!queueBool)
+                        console.log(queueBool)
+                    }}
                     size='lg'
                     sx={(theme) => ({
                         backgroundColor : '#C3073F',
@@ -59,41 +95,15 @@ const DiceRoll = () => {
                         },
                     })}
                 >
-                    {item.text}
+                    Queue
                 </Button>
-                )
-            })}
-            <Button 
-                onClick={() => {
-                    setRollQueue([])
-                }}
-                size='lg'
-                mx='1em'
-                sx={(theme) => ({
-                    backgroundColor : '#C3073F',
-                    '&:hover': {
-                        backgroundColor : '#950740'
-                    },
-                })}
-            >
-                CLEAR
-            </Button>
-            <Button
-                mx='1em'
-                onClick={() => {
-                    setQueueBool(!queueBool)
-                    console.log(queueBool)
-                }}
-                size='lg'
-                sx={(theme) => ({
-                    backgroundColor : '#C3073F',
-                    '&:hover': {
-                        backgroundColor : '#950740'
-                    },
-                })}
-            >
-                Queue
-            </Button>
+                <Button
+                    onClick={() => {
+                        setRollResult(queueSum)
+                    }}
+                >
+                    =
+                </Button>
             </Flex>
             
         </Flex>
