@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Flex, Button, Text } from '@mantine/core';
+import { Container, Flex, Button, Text, Box } from '@mantine/core';
 import { useMemo, useState } from 'react';
 import useStore from '../hooks/useStore';
 import Queue from './queue';
@@ -31,14 +31,26 @@ const DiceRoll = () => {
         return (
 
         <Flex align='center' direction='column'>
-            <Flex my='2em' direction='column'>
-                <Queue>
-                    {rollQueue.map((roll) => {
-                        return (
-                            <Roll roll={roll}/>
-                        )
-                    })}
-                </Queue>
+            <Flex my='2em' direction='row'>
+                {queueBool ? 
+                    <Queue>
+                        {rollQueue.map((roll) => {
+                            return (
+                                <Text 
+                                    color='white'
+                                    sx={(theme) => ({
+                                        fontSize: '2em',
+                                    })}
+                                    mx='1em'
+                                >
+                                    {<Roll roll={roll}/>}
+                                </Text>
+                            )
+                        })}
+                    </Queue> :
+                    <Box></Box>
+                }
+                
             </Flex>
             <Flex>
                 {items?.map((item) => {
@@ -85,7 +97,7 @@ const DiceRoll = () => {
                     mx='1em'
                     onClick={() => {
                         setQueueBool(!queueBool)
-                        console.log(queueBool)
+                        setRollResult(0)
                     }}
                     size='lg'
                     sx={(theme) => ({
@@ -101,6 +113,13 @@ const DiceRoll = () => {
                     onClick={() => {
                         setRollResult(queueSum)
                     }}
+                    size='lg'
+                    sx={(theme) => ({
+                        backgroundColor : '#C3073F',
+                        '&:hover': {
+                            backgroundColor : '#950740'
+                        },
+                    })}
                 >
                     =
                 </Button>
