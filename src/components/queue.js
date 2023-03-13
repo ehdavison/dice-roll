@@ -8,8 +8,6 @@ const Queue = ({children}) => {
         <Flex
             h='5em'
             w='auto'
-            my='5em'
-            mx='15em'
             justify='center'
             align='center'
             sx={(theme) => ({
